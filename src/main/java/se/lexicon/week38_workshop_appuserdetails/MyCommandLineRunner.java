@@ -14,11 +14,15 @@ import java.util.Optional;
 
 @Component
 public class MyCommandLineRunner implements CommandLineRunner {
-    @Autowired
-    AppUserRepository appUserRepository;
+    private AppUserRepository appUserRepository;
+
+    private DetailsRepository detailsRepository;
 
     @Autowired
-    DetailsRepository detailsRepository;
+    public MyCommandLineRunner(AppUserRepository appUserRepository, DetailsRepository detailsRepository) {
+        this.appUserRepository = appUserRepository;
+        this.detailsRepository = detailsRepository;
+    }
 
     @Override
     public void run(String... args) throws Exception {
