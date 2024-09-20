@@ -56,6 +56,11 @@ public class MyCommandLineRunner implements CommandLineRunner {
         findByDetailsId.ifPresent(System.out::println);
         System.out.println();
 
+        System.out.println("-------------------------------FIND BY DETAILS EMAIL ID---------------------------------");
+        Optional<AppUser> findByDetailsEmail = appUserRepository.findByDetailsEmailIgnoreCase(details1.getEmail());
+        findByDetailsEmail.ifPresent(System.out::println);
+        System.out.println();
+
         System.out.println("------------------------------FIND BY USERNAME AND PASSWORD-----------------------------");
         Optional<AppUser> findByUserPass = appUserRepository.getAppUserByUserNameAndPassword(appUser2.getUserName(), appUser2.getPassword());
         findByUserPass.ifPresent(System.out::println);

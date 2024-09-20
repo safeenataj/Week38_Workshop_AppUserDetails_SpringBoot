@@ -18,6 +18,8 @@ public interface AppUserRepository extends CrudRepository<AppUser, Integer> {
 
     Optional<AppUser> getAppUserByDetails_Id(Integer details_id);
 
+    Optional<AppUser> findByDetailsEmailIgnoreCase(String email);
+
     Optional<AppUser> getAppUserByUserNameAndPassword(String userName, String password);
 
 //    Find user by email ignore case.

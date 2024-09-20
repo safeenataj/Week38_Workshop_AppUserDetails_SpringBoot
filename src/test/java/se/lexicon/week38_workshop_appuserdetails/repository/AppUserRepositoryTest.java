@@ -87,6 +87,24 @@ public class AppUserRepositoryTest {
 
     @Test
     @Transactional
+    public void testFindByDetailsEmailIgnoreCase() {
+        Details details1 = new Details("emilyjohnson@test.se", "Emily Johnson", LocalDate.of(2000, 9, 9));
+        AppUser appUser1 = new AppUser(details1.getName(), "emily123", LocalDate.of(2024,9,9), details1);
+        detailsRepository.save(details1);
+        appUserRepository.save(appUser1);
+
+        Details details2 = new Details("markjustin@test.se", "Mark Justin", LocalDate.of(2001, 2, 2));
+        AppUser appUser2 = new AppUser(details2.getName(), "mark123", LocalDate.of(2024,2,2), details2);
+        detailsRepository.save(details2);
+        appUserRepository.save(appUser2);
+
+        Optional<AppUser> foundUser = appUserRepository.findByDetailsEmailIgnoreCase(details1.getEmail());
+        Assertions.assertTrue(foundUser.isPresent());
+        Assertions.assertNotNull(foundUser);
+    }
+
+    @Test
+    @Transactional
     public void testGetAppUserByUserNameAndPassword() {
         Details details1 = new Details("emilyjohnson@test.se", "Emily Johnson", LocalDate.of(2000, 9, 9));
         AppUser appUser1 = new AppUser(details1.getName(), "emily123", LocalDate.of(2024,9,9), details1);
