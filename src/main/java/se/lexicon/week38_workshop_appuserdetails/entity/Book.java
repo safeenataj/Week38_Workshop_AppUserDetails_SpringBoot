@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +22,7 @@ public class Book {
     @Column(unique = true, nullable = false, updatable = false)
     private String isbn;
 
+
     @Setter
     @Column(nullable = false, updatable = false, length = 100)
     private String title;
@@ -26,6 +30,12 @@ public class Book {
     @Setter
     @Column(updatable = false, nullable = false)
     private int maxLoanDays;
+    @Setter
+    @ManyToMany
+            (mappedBy = "writtenBooks")
+
+    private Set<Author> authorset = new HashSet<>();
+
 
     public Book(String isbn, String title, int maxLoanDays) {
         this.isbn = isbn;
